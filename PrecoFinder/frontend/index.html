@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PreçoFinder</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="icon" type="image/png" href="./assets/icon.png" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="max-w-3xl mx-auto px-4 py-6">
+    <header class="flex items-center justify-between mb-6">
+      <h1 class="text-2xl font-bold">🔎 PreçoFinder</h1>
+      <button id="installBtn" class="hidden px-3 py-2 rounded-xl bg-blue-500 text-white text-sm">Instalar App</button>
+    </header>
+
+    <section class="bg-white rounded-2xl shadow p-4 md:p-6 space-y-4">
+      <div class="grid md:grid-cols-3 gap-3">
+        <div>
+          <label class="block text-sm font-medium mb-1">Tipo de pesquisa</label>
+          <select id="tipo" class="w-full border rounded-xl px-3 py-2">
+            <option value="produtos">Produtos (e-commerce)</option>
+            <option value="hoteis">Hotéis/viagens</option>
+            <option value="generico">Genérico</option>
+          </select>
+        </div>
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium mb-1">Termo</label>
+          <input id="termo" type="text" placeholder="Ex.: Samsung S24, Hotel em Fez"
+                 class="w-full border rounded-xl px-3 py-2" />
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-3">
+        <div class="md:col-span-1">
+          <label class="block text-sm font-medium mb-1">💸 Alerta de preço (opcional)</label>
+          <input id="alertaPreco" type="number" step="0.01" min="0" placeholder="Ex.: 799.99"
+                 class="w-full border rounded-xl px-3 py-2" />
+        </div>
+        <div class="md:col-span-2 flex items-end gap-3">
+          <button id="btnSearch" class="px-4 py-2 rounded-xl bg-blue-600 text-white">Procurar</button>
+          <button id="btnCSV" class="px-4 py-2 rounded-xl bg-gray-200">Exportar CSV</button>
+          <button id="btnAPI" class="px-4 py-2 rounded-xl bg-gray-200">Definir API</button>
+        </div>
+      </div>
+
+      <div id="status" class="text-sm text-gray-600"></div>
+
+      <div id="bestBox" class="hidden border rounded-xl p-4 bg-green-50">
+        <div class="text-sm text-green-700">Melhor preço</div>
+        <a id="bestLink" href="#" target="_blank" class="block text-lg font-semibold underline"></a>
+        <div id="bestPrice" class="text-xl font-bold"></div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm" id="resultsTable">
+          <thead>
+            <tr class="text-left border-b">
+              <th class="py-2 pr-4">URL</th>
+              <th class="py-2 pr-4">Preço (€)</th>
+              <th class="py-2">Score</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="mt-8 text-center text-xs text-gray-500">
+      <p>PreçoFinder • Desenvolvido por Hugo Eugénio • PWA • v1.0</p>
+    </footer>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
